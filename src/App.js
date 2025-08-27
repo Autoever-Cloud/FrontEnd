@@ -1,9 +1,11 @@
 import './App.css';
-import MainPage from './views/MainPage'
+import MainLayout from './views/MainLayout'
 
 function App() {
   return (
-      <MainPage/>
+      <div>
+        <MainLayout/>
+      </div>
   );
 }
 
