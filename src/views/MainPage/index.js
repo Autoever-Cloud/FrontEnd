@@ -4,85 +4,39 @@
 
 import React from 'react';
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Button,
   Container,
   Box,
-  IconButton,
 } from '@mui/material';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Navigation from '../Navigation'
 
 function MainPage() {
-  // 기본 테마 색상을 활용하여 버튼 스타일 정의
   const mainButtonStyle = {
-    bgcolor: '#6750A4', // A muted purple color
+    bgcolor: '#554f65ff', // A muted purple color
     color: 'white',
-    borderRadius: '20px',
+    borderRadius: '16px',
     padding: '10px 25px',
     fontSize: '1rem',
     fontWeight: 'bold',
     '&:hover': {
       bgcolor: '#5A438A', // A slightly darker shade for hover
     },
-    textTransform: 'none', // Prevent uppercase transformation
+    textTransform: 'none',
     boxShadow: '0px 3px 5px rgba(0,0,0,0.2)',
   };
 
+
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: '#F8F7FA', minHeight: '100vh' }}>
-      {/* 상단 네비게이션 바 */}
-      <AppBar
-        position="static"
-        elevation={1}
-        sx={{ backgroundColor: 'white', color: 'black' }}
-      >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 1 }}
-            >
-              <RestaurantMenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
-              SeatEver
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-            <Typography sx={{ cursor: 'pointer', fontWeight: 'medium' }}>
-              Waiting List
-            </Typography>
-            <Typography sx={{ cursor: 'pointer', fontWeight: 'medium' }}>
-              Booking List
-            </Typography>
-            <Typography sx={{ cursor: 'pointer', fontWeight: 'medium' }}>
-              My Page
-            </Typography>
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: '#E8E8E8',
-                color: 'black',
-                fontWeight: 'bold',
-                boxShadow: 'none',
-                '&:hover': { bgcolor: '#DCDCDC' },
-                textTransform: 'none',
-              }}
-            >
-              Logout
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
 
+        {/*네비게이션 바*/} 
+        <Navigation/>
+      
       {/* 중앙 컨텐츠 */}
       <Container maxWidth="md">
         <Box
@@ -92,12 +46,16 @@ function MainPage() {
             alignItems: 'center',
             justifyContent: 'center',
             textAlign: 'center',
-            mt: 15, // Margin-top for spacing
+            mt: 15,
           }}
         >
-          {/* 로고 및 슬로건 */}
+          {/* 중앙 로고 부분을 이미지로 변경 */}
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-            <RestaurantMenuIcon sx={{ fontSize: 60, color: '#333' }} />
+            <img
+              src="/LOGO.png" // public 폴더의 LOGO.png 경로
+              alt="SeatEver Logo"
+              style={{ width: 120, height: 120}} // 적절한 크기로 조정
+            />
             <Typography
               variant="h2"
               component="h1"
@@ -106,7 +64,10 @@ function MainPage() {
               SeatEver
             </Typography>
           </Box>
-          <Typography variant="h6" color="text.secondary" sx={{ mb: 6 }}>
+          <Typography 
+            variant="h6" 
+            color="text.secondary" 
+            sx={{ fontWeight: 'bold', mb: 6 }}>
             Any Seat you like, Sit whenever, SeatEver
           </Typography>
 
