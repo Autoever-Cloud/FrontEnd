@@ -12,7 +12,7 @@ export default function MainLayout(){
     return (
         <BrowserRouter>
             <Navigation/>
-            <MainPage/>
+            <Authentication/>
         </BrowserRouter>
     )
 }
