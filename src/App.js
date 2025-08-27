@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import mainPage from './views/MainPage'
+import MainPage from './views/MainPage'
 
 function App() {
   return (
-      <mainPage/>
+      <MainPage/>
   );
 }
 
