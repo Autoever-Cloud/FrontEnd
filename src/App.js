@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import mainPage from './views/MainPage'
+import MainLayout from './views/MainLayout'
 
 function App() {
   return (
-      <mainPage/>
+      <div>
+        <MainLayout/>
+      </div>
   );
 }
 
