@@ -13,7 +13,6 @@ import {
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import Navigation from '../Navigation'
 
 function MainPage() {
   const mainButtonStyle = {
@@ -33,9 +32,6 @@ function MainPage() {
 
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: '#F8F7FA', minHeight: '100vh' }}>
-
-        {/*네비게이션 바*/} 
-        <Navigation/>
       
       {/* 중앙 컨텐츠 */}
       <Container maxWidth="md">

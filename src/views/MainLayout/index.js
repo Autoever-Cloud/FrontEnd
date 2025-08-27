@@ -5,11 +5,14 @@
 import React from "react";
 import Authentication from "../Authentication";
 import { BrowserRouter } from "react-router-dom";
+import Navigation from '../Navigation'
+import MainPage from "../MainPage";
 
 export default function MainLayout(){
     return (
         <BrowserRouter>
-            <Authentication />
+            <Navigation/>
+            <MainPage/>
         </BrowserRouter>
     )
 }
