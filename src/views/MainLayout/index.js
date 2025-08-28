@@ -14,6 +14,7 @@ export default function MainLayout(){
     const token = cookies.token;
 
     return (
+        /*
         <BrowserRouter>
             {token ? (
                 <>
@@ -23,6 +24,11 @@ export default function MainLayout(){
             ) : (
                 <Authentication />
             )}
+        </BrowserRouter>
+         */
+        <BrowserRouter>
+            <Navigation />
+            <Routing />
         </BrowserRouter>
     )
 }

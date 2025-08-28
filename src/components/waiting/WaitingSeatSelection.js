@@ -1,29 +1,22 @@
-// 타이틀
-// 식당 정보
-// 좌석 배치표 (선택 버튼)
-// 좌석 정보
-// 좌석 예약 버튼
-// 예약 버튼 누르면 MyPage
-
 import React, { useState } from "react";
-import {
-    Box,
-    Button,
-    Typography,
-    Grid,
-    Paper
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Typography, Paper } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function WaitingSeatSelection() {
     const navigate = useNavigate();
+    const { state: restaurant } = useLocation();
     const [selectedSeat, setSelectedSeat] = useState(null);
 
-    // 예시 좌석 데이터 (실제는 서버에서 받아옴)
-    const seats = Array.from({ length: 20 }, (_, i) => ({
-        id: i + 1,
-        waiting: Math.floor(Math.random() * 10), // 임시 대기 인원
-    }));
+    // 좌석 데이터 (간소화된 평면도 예시)
+    const seats = [
+        { id: 1, x: 50, y: 50, w: 60, h: 60, type: "2인석" },
+        { id: 2, x: 150, y: 50, w: 60, h: 60, type: "2인석" },
+        { id: 3, x: 250, y: 50, w: 120, h: 60, type: "4인석" },
+        { id: 4, x: 50, y: 150, w: 120, h: 60, type: "4인석" },
+        { id: 5, x: 200, y: 150, w: 60, h: 60, type: "2인석" },
+        { id: 6, x: 300, y: 150, w: 60, h: 60, type: "2인석" },
+        // ... 필요에 맞게 좌표와 크기 추가
+    ];
 
     const handleSeatClick = (seat) => {
         setSelectedSeat(seat);
@@ -31,10 +24,17 @@ export default function WaitingSeatSelection() {
 
     const handleReserve = () => {
         if (!selectedSeat) return;
-        // TODO: 예약 API 호출
-        alert(`${selectedSeat.id}번 좌석에 줄서기 완료!`);
-        navigate("/mypage"); // 예약 성공 후 MyPage로 이동
+        alert(`${restaurant.name} - ${selectedSeat.id}번 (${selectedSeat.type}) 좌석 예약 완료!`);
+        navigate("/mypage");
     };
+
+    if (!restaurant) {
+        return (
+            <Box p={4}>
+                <Typography>선택한 식당 정보가 없습니다.</Typography>
+            </Box>
+        );
+    }
 
     return (
         <Box
@@ -49,50 +49,67 @@ export default function WaitingSeatSelection() {
                 Waiting Page
             </Typography>
 
-            {/* 식당 정보 */}
+            {/* 선택한 식당 정보 */}
             <Box textAlign="center" mb={4}>
                 <Typography variant="h5" fontWeight="bold">
-                    호성이 두마리 치킨
+                    {restaurant.name}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                    서울 금천구 가산디지털1로 <b>189</b>
+                    {restaurant.location}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Tel: {restaurant.phone}
                 </Typography>
             </Box>
 
-            {/* 좌석 선택 */}
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-                좌석 선택
-            </Typography>
-
-            {/* 좌석 배치 (간소화된 Grid) */}
-            <Grid container spacing={2} sx={{ mb: 4 }}>
+            {/* 좌석 평면도 */}
+            <Box
+                sx={{
+                    position: "relative",
+                    width: 600,
+                    height: 400,
+                    mx: "auto",
+                    bgcolor: "#eaeaea",
+                    border: "2px solid #ccc",
+                }}
+            >
                 {seats.map((seat) => (
-                    <Grid item xs={3} key={seat.id}>
-                        <Paper
-                            onClick={() => handleSeatClick(seat)}
-                            sx={{
-                                height: 60,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                cursor: "pointer",
-                                border: seat.id === selectedSeat?.id ? "3px solid #5A4A66" : "1px solid #ccc",
-                                bgcolor: seat.id === selectedSeat?.id ? "#e6e0f0" : "white",
-                            }}
-                            elevation={3}
-                        >
-                            {seat.id}번
-                        </Paper>
-                    </Grid>
+                    <Paper
+                        key={seat.id}
+                        onClick={() => handleSeatClick(seat)}
+                        sx={{
+                            position: "absolute",
+                            top: seat.y,
+                            left: seat.x,
+                            width: seat.w,
+                            height: seat.h,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            border: seat.id === selectedSeat?.id ? "3px solid #5A4A66" : "1px solid #999",
+                            bgcolor: seat.id === selectedSeat?.id ? "#e6e0f0" : "white",
+                        }}
+                        elevation={3}
+                    >
+                        {seat.id}
+                    </Paper>
                 ))}
-            </Grid>
+            </Box>
 
-            {/* 좌석 정보 */}
+            {/* 좌석 정보 & 예약 버튼 */}
             {selectedSeat && (
-                <Box display="flex" justifyContent="space-between" alignItems="center" width="100%" maxWidth={500} mx="auto" mt={2}>
+                <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    width="100%"
+                    maxWidth={500}
+                    mx="auto"
+                    mt={4}
+                >
                     <Typography variant="body1">
-                        좌석 번호: {selectedSeat.id} <br />
-                        내 앞으로: {selectedSeat.waiting}명
+                        좌석 번호: {selectedSeat.id} ({selectedSeat.type})
                     </Typography>
                     <Button
                         variant="contained"

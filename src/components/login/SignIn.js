@@ -25,10 +25,10 @@ export default function SignIn({ setAuthView }) {
             });
 
             // 성공 시 토큰 저장 (예시: response.data.token이 있다고 가정)
-            const { token, exprTime, message } = response.data;
+            const { token, user } = response.data;
             const expires = new Date();
             // 쿠키 한시간 만료
-            expires.setMilliseconds(expires.getMilliseconds() + (exprTime || 3600000));
+            expires.setMilliseconds(expires.getMilliseconds() + (3600000));
             setCookies("token", token, {expires});
             setUser(user);
         } catch (err) {
