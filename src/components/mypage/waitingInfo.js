@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Box, Typography, Paper, Stack, Button } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, Paper, Stack, Button } from '@mui/material';
 
 const reservation = {
     is_waiting: false,
@@ -10,7 +9,6 @@ const reservation = {
     time: "18:00", //time 전용
 }
 export default function WaitingInfo(){
-    const navigate = useNavigate();
     const actionButtonStyle= {
         bgcolor: '#554f65ff', // A muted purple color
         color: 'white',

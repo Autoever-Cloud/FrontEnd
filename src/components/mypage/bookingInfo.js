@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box, Typography, Paper, Stack, Button } from '@mui/material';
+import { Box, Typography, Paper, Stack, Button } from '@mui/material';
 
 const reservation = {
     is_waiting: true,

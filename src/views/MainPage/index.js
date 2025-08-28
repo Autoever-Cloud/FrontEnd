@@ -10,7 +10,6 @@ import {
   Box,
 } from '@mui/material';
 
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from "react-router-dom";

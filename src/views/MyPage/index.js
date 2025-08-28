@@ -5,8 +5,7 @@
 import React from 'react';
 import WaitingInfo from "../../components/mypage/waitingInfo"
 import BookingInfo from "../../components/mypage/bookingInfo"
-import { Container, Box, Typography, Paper, Stack, Button } from '@mui/material';
-import { Book } from '@mui/icons-material';
+import { Container, Box, Typography} from '@mui/material';
 
 // 세션에 있어야 하는 친구들...
 const user = {
