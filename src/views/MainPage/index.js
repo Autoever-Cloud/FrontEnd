@@ -13,8 +13,10 @@ import {
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { useNavigate } from "react-router-dom";
 
 function MainPage() {
+  const navigate = useNavigate();
   const mainButtonStyle = {
     bgcolor: '#554f65ff', // A muted purple color
     color: 'white',
@@ -73,6 +75,7 @@ function MainPage() {
               variant="contained"
               startIcon={<SwapHorizIcon />}
               sx={mainButtonStyle}
+              onClick={() => navigate("/waitinglist")}
             >
               웨이팅 하러 가기!!
             </Button>
@@ -80,6 +83,7 @@ function MainPage() {
               variant="contained"
               startIcon={<EventAvailableIcon />}
               sx={mainButtonStyle}
+              onClick={() => navigate("/bookinglist")}
             >
               예약 하러가기!!
             </Button>
