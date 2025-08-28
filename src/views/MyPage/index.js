@@ -3,8 +3,8 @@
 // 실시간 웨이팅 정보 -> 최소, 뒤로 미루기, 좌석 보기
 // 예약 정보 (리스트) -> 취소, 수정
 import React from 'react';
-import WaitingInfo from "../../components/mypage/waitingInfo"
-import BookingInfo from "../../components/mypage/bookingInfo"
+import WaitingInfo from "../../components/mypage/WaitingInfo"
+import BookingInfo from "../../components/mypage/ReservationInfo"
 import { Container, Box, Typography} from '@mui/material';
 
 // 세션에 있어야 하는 친구들...
