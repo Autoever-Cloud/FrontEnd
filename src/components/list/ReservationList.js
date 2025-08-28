@@ -13,6 +13,7 @@ import {
     Divider,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from "react-router-dom";
 
 // 백엔드 API 호출을 대체할 더미 데이터
 const dummyRestaurants = [
@@ -48,6 +49,12 @@ const dummyRestaurants = [
     },
 ];
 function WaitingListPage() {
+    const navigate = useNavigate();
+    const handleClickRestaurant = (resto) => {
+        // 페이지 이동하면서 선택한 식당 정보를 state로 전달
+        navigate("/waitingseat", { state: resto });
+    };
+
     return (
         <Box sx={{ width: '100%', backgroundColor: '#F8F7FA', py: 5 }}>
             <Container maxWidth="md">
@@ -89,13 +96,16 @@ function WaitingListPage() {
                     {dummyRestaurants.map((resto, index) => (
                         <React.Fragment key={resto.id}>
                             <Paper
+                                onClick={() => handleClickRestaurant(resto)}
                                 elevation={0}
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: 2,
                                     p: 2,
-                                    backgroundColor: 'transparent', // Paper 배경을 투명하게
+                                    backgroundColor: 'transparent',
+                                    cursor: "pointer",
+                                    "&:hover": { bgcolor: "#f1f1f1" }
                                 }}
                             >
                                 {/* 이미지 Placeholder */}
