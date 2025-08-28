@@ -6,9 +6,11 @@ import {
   Box,
   IconButton, // IconButton은 그대로 유지하지만, 내부 아이콘은 이미지로 변경
 } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 
 export default function Navigation(){
+    const navigate = useNavigate();
 
     const naviButtonStyle= {
         bgcolor: '#ffffffff',
@@ -34,6 +36,7 @@ export default function Navigation(){
               color="inherit"
               aria-label="menu"
               sx={{ mr: 1 }}
+              onClick={() => navigate("/")}
             >
               <img
                 src="/LOGO.png" // public 폴더의 LOGO.png 경로
@@ -46,6 +49,7 @@ export default function Navigation(){
             <Button
               variant="contained"
               sx={naviButtonStyle}
+              onClick={() => navigate("/waitinglist")}
             >
               Waiting List
             </Button>

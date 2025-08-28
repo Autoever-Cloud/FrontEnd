@@ -7,14 +7,13 @@ import Authentication from "../Authentication";
 import { BrowserRouter } from "react-router-dom";
 import Navigation from '../Navigation'
 import MainPage from "../MainPage";
-import Testing from "../WaitingList"
+import Routing from "../../Routing";
 
 export default function MainLayout(){
     return (
         <BrowserRouter>
             <Navigation/>
-            {/*<MainPage/>*/}
-            <Testing/>
+            <Routing />
         </BrowserRouter>
     )
 }
