@@ -1,8 +1,8 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
 import ProjectMain from "./views/MainPage";
-import WaitingList from "./views/WaitingList";
-import BookingList from "./views/BookingList";
+import ReservationList from "./views/ReservationList";
+import MyPage from "./views/MyPage";
 
 export default function Routing(){
     return (
@@ -10,8 +10,8 @@ export default function Routing(){
             <div style={{ marginTop: '90px' }}>
                 <Routes>
                     <Route path='/' element={<ProjectMain/>} />
-                    <Route path='/waitinglist' element={<WaitingList/>} />
-                    <Route path='/bookinglist' element={<BookingList/>} />
+                    <Route path='/reservationlist' element={<ReservationList/>} />
+                    <Route path='/mypage' element={<MyPage/>}/>
                 </Routes>
             </div>
         </div>
