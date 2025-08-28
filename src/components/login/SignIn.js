@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Box,
     Button,
@@ -7,8 +7,36 @@ import {
     Link,
 } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function SignIn({ setAuthView }) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [cookies, setCookies] = useCookies(["token"]);
+
+    const handleSignIn = async () => {
+        try {
+            const response = await axios.post("http://localhost:8080/auth/login", {
+                user_email: email,
+                user_passwd: password,
+            });
+
+            // 성공 시 토큰 저장 (예시: response.data.token이 있다고 가정)
+            const { token, exprTime, message } = response.data;
+            const expires = new Date();
+            // 쿠키 한시간 만료
+            expires.setMilliseconds(expires.getMilliseconds() + (exprTime || 3600000));
+            setCookies("token", token, {expires});
+        } catch (err) {
+            if (err.response && err.response.data) {
+                window.alert(err.response.data.error || "로그인 실패");
+            } else {
+                window.alert("서버 오류가 발생했습니다.");
+            }
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -57,6 +85,8 @@ export default function SignIn({ setAuthView }) {
                         fullWidth
                         variant="outlined"
                         placeholder="EMAIL"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         sx={{ mb: 2 }}
                     />
                     <TextField
@@ -64,6 +94,8 @@ export default function SignIn({ setAuthView }) {
                         type="password"
                         variant="outlined"
                         placeholder="PASSWORD"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         sx={{ mb: 2 }}
                     />
                     <Button
@@ -76,6 +108,7 @@ export default function SignIn({ setAuthView }) {
                             py: 1.2,
                             mt: 1,
                         }}
+                        onClick={handleSignIn}
                     >
                         SIGN IN
                     </Button>

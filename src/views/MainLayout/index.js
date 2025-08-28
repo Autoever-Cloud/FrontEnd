@@ -5,15 +5,24 @@
 import React from "react";
 import Authentication from "../Authentication";
 import { BrowserRouter } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import Navigation from '../Navigation'
-import MainPage from "../MainPage";
-import Routing from "../../Routing";
+import Routing from '../../Routing'
 
 export default function MainLayout(){
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+
     return (
         <BrowserRouter>
-            <Navigation/>
-            <Routing />
+            {token ? (
+                <>
+                    <Navigation />
+                    <Routing />
+                </>
+            ) : (
+                <Authentication />
+            )}
         </BrowserRouter>
     )
 }
