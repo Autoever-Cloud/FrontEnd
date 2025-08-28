@@ -9,11 +9,13 @@ import {
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import {useUserStore} from "../../stores";
 
 export default function SignIn({ setAuthView }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [cookies, setCookies] = useCookies(["token"]);
+    const {user, setUser} = useUserStore();
 
     const handleSignIn = async () => {
         try {
@@ -28,6 +30,7 @@ export default function SignIn({ setAuthView }) {
             // 쿠키 한시간 만료
             expires.setMilliseconds(expires.getMilliseconds() + (exprTime || 3600000));
             setCookies("token", token, {expires});
+            setUser(user);
         } catch (err) {
             if (err.response && err.response.data) {
                 window.alert(err.response.data.error || "로그인 실패");

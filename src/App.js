@@ -1,11 +1,12 @@
 import './App.css';
 import MainLayout from './views/MainLayout'
+import {CookiesProvider} from "react-cookie";
 
 function App() {
   return (
-      <div>
-        <MainLayout/>
-      </div>
+      <CookiesProvider>
+          <MainLayout/>
+      </CookiesProvider>
   );
 }
 
