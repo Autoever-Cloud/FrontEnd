@@ -56,6 +56,7 @@ export default function Navigation(){
             <Button
               variant="contained"
               sx={naviButtonStyle}
+              onClick={() => navigate("/bookinglist")}
             >
               Booking List
             </Button>
