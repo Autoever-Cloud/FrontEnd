@@ -49,20 +49,14 @@ export default function Navigation(){
             <Button
               variant="contained"
               sx={naviButtonStyle}
-              onClick={() => navigate("/waitinglist")}
+              onClick={() => navigate("/reservationlist")}
             >
-              Waiting List
+              Reservation 
             </Button>
             <Button
               variant="contained"
               sx={naviButtonStyle}
-              onClick={() => navigate("/bookinglist")}
-            >
-              Booking List
-            </Button>
-            <Button
-              variant="contained"
-              sx={naviButtonStyle}
+              onClick={() => navigate("/mypage")}
             >
              My Page 
             </Button>

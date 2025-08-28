@@ -71,19 +71,12 @@ function MainPage() {
 
           {/* 기능 버튼 */}
           <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center' }}>
-            <Button
-              variant="contained"
-              startIcon={<SwapHorizIcon />}
-              sx={mainButtonStyle}
-              onClick={() => navigate("/waitinglist")}
-            >
-              웨이팅 하러 가기!!
-            </Button>
+          
             <Button
               variant="contained"
               startIcon={<EventAvailableIcon />}
               sx={mainButtonStyle}
-              onClick={() => navigate("/bookinglist")}
+              onClick={() => navigate("/reservationlist")}
             >
               예약 하러가기!!
             </Button>
@@ -91,6 +84,7 @@ function MainPage() {
               variant="contained"
               startIcon={<CheckCircleOutlineIcon />}
               sx={mainButtonStyle}
+              onClick={() => navigate("/mypage")}
             >
               나의 예약/웨이팅
             </Button>

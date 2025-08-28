@@ -1,9 +1,9 @@
 // BookingRestauantList 화면 불러옴
 import React from "react";
-import BookingRestaurantList from "../../components/booking/BookingRestaurantList"
+import ReservationList from "../../components/list/ReservationList"
 
 export default function BookingList(){
     return (
-      <BookingRestaurantList/>
+      <ReservationList/>
     )
 }

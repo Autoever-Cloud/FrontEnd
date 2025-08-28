@@ -2,7 +2,6 @@
 // 식당 검색창
 // 식당 리스트
 // 식당 선택 (클릭 가능)
-
 import React from 'react';
 import {
   Container,
@@ -23,7 +22,13 @@ const dummyRestaurants = [
     location: '가산디지털로 101',
     is_w: true
   },
- {
+  {
+    name: '호성이 두마리 치킨',
+    phone: "010-1111-1111",
+    location: '가산디지털로 100',
+    is_w: true
+  },
+  {
     name: '진주 냉면',
     phone: "010-3333-3333",
     location: '가산디지털로 103',
@@ -35,8 +40,14 @@ const dummyRestaurants = [
     location: '가산디지털로 104',
     is_w: true
   },
+  {
+    name: '지원이네 흑돼지',
+    phone: "010-5555-5555",
+    location: '가산디지털로 105',
+    is_w: true
+  },
 ];
-function BookingListPage() {
+function WaitingListPage() {
   return (
     <Box sx={{ width: '100%', backgroundColor: '#F8F7FA', py: 5 }}>
       <Container maxWidth="md">
@@ -47,7 +58,7 @@ function BookingListPage() {
           align="center"
           sx={{ fontWeight: 'bold', mb: 4 }}
         >
-          Booking List
+          Reservation
         </Typography>
 
         {/* 검색창 */}
@@ -122,4 +133,4 @@ function BookingListPage() {
   );
 }
 
-export default BookingListPage;
+export default WaitingListPage;
