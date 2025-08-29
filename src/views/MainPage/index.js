@@ -35,7 +35,7 @@ function MainPage() {
       <Box sx={{ flexGrow: 1, backgroundColor: '#F8F7FA', minHeight: '100vh' }}>
 
         {/* 중앙 컨텐츠 */}
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ pt: 10 }}>
           <Box
               sx={{
                 display: 'flex',

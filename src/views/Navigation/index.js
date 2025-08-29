@@ -23,7 +23,7 @@ export default function Navigation(){
 
     return (
         <AppBar
-            position="static"
+            position="fixed"
             elevation={1}
             sx={{ backgroundColor: 'white', color: 'black' }}
         >

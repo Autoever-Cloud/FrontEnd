@@ -8,7 +8,7 @@ import MyPage from "./views/MyPage";
 export default function Routing(){
     return (
         <div>
-            <div style={{ marginTop: '90px' }}>
+            <div style={{ marginTop: '64px' }}>
                 <Routes>
                     <Route path='/' element={<ProjectMain/>} />
                     <Route path='/reservationlist' element={<ReservationList/>} />
