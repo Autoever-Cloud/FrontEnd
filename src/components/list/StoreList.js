@@ -21,7 +21,7 @@ const dummyRestaurants = [
         name: '명지 찜닭',
         phone: "010-2222-2222",
         location: '가산디지털로 101',
-        is_w: true
+        is_w: false
     },
     {
         name: '호성이 두마리 치킨',
@@ -33,13 +33,13 @@ const dummyRestaurants = [
         name: '진주 냉면',
         phone: "010-3333-3333",
         location: '가산디지털로 103',
-        is_w: true
+        is_w: false
     },
     {
         name: '지우카츠',
         phone: "010-4444-4444",
         location: '가산디지털로 104',
-        is_w: true
+        is_w: false
     },
     {
         name: '지원이네 흑돼지',
@@ -52,7 +52,8 @@ function WaitingListPage() {
     const navigate = useNavigate();
     const handleClickRestaurant = (resto) => {
         // 페이지 이동하면서 선택한 식당 정보를 state로 전달
-        navigate("/waitingseat", { state: resto });
+        // resto가 waiting인지 reservation인지에 따라 다른 페이지로 안내 
+        resto.is_w ? navigate("/waitingseat", { state: resto }) : navigate("/reservationseat", {state:resto})
     };
 
     return (
@@ -65,7 +66,7 @@ function WaitingListPage() {
                     align="center"
                     sx={{ fontWeight: 'bold', mb: 4 }}
                 >
-                    Reservation
+                    Store List
                 </Typography>
 
                 {/* 검색창 */}

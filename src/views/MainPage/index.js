@@ -75,7 +75,7 @@ function MainPage() {
                   variant="contained"
                   startIcon={<EventAvailableIcon />}
                   sx={mainButtonStyle}
-                  onClick={() => navigate("/reservationlist")}
+                  onClick={() => navigate("/storelist")}
               >
                 예약 하러가기!!
               </Button>
