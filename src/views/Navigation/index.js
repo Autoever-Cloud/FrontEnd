@@ -39,9 +39,9 @@ export default function Navigation(){
                         onClick={() => navigate("/")}
                     >
                         <img
-                            src="/LOGO.png" // public 폴더의 LOGO.png 경로
-                            alt="SeatEver Logo"
-                            style={{ width: 64, height: 64 }} // 적절한 크기로 조정
+                            src="/assets/main_logo.png" // public 폴더의 LOGO.png 경로
+                            alt="Solog Logo"
+                            style={{ width: 100, height: 64 }} // 적절한 크기로 조정
                         />
                     </IconButton>
                 </Box>
