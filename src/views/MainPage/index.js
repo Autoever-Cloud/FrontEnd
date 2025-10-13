@@ -130,7 +130,7 @@ const Banner1 = styled(Section)`
 
   .bottom {
     position: absolute;
-    bottom: 20px;
+    bottom: 70px;
     width: 85%;
     left: 0;
     display: flex;
