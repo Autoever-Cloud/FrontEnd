@@ -1,35 +1,47 @@
-// 화면 최상단 네비게이션 바
 import {
     AppBar,
     Toolbar,
     Button,
     Box,
-    IconButton, // IconButton은 그대로 유지하지만, 내부 아이콘은 이미지로 변경
-} from '@mui/material';
+    IconButton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-
-export default function Navigation(){
+export default function Navigation() {
     const navigate = useNavigate();
 
-    const naviButtonStyle= {
-        bgcolor: '#ffffffff',
-        color: 'black',
-        fontWeight: 'bold',
-        boxShadow: 'none',
-        '&:hover': { bgcolor: '#eeeeeeff' },
-        textTransform: 'none',
+    const naviButtonStyle = {
+        bgcolor: "white",
+        color: "#003366",
+        fontFamily: "'Poppins', 'Noto Sans KR', 'Arial Black', sans-serif",
+        fontWeight: 800,
+        fontSize: "17px",
+        letterSpacing: "0.7px",
+        boxShadow: "none",
+        "&:hover": {
+            bgcolor: "#e6f0ff",
+            color: "#002244",
+        },
+        textTransform: "none",
     };
 
     return (
         <AppBar
             position="fixed"
             elevation={1}
-            sx={{ backgroundColor: 'white', color: 'black' }}
+            sx={{
+                backgroundColor: "white",
+                color: "#003366",
+                borderBottom: "1px solid #e0e0e0",
+            }}
         >
-            <Toolbar sx={{ justifyContent: 'space-between' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    {/* 상단 로고 아이콘 부분을 이미지로 변경 */}
+            <Toolbar
+                sx={{
+                    justifyContent: "space-between",
+                    px: 8,
+                }}
+            >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                     <IconButton
                         size="large"
                         edge="start"
@@ -39,37 +51,32 @@ export default function Navigation(){
                         onClick={() => navigate("/")}
                     >
                         <img
-                            src="/assets/main_logo.png" // public 폴더의 LOGO.png 경로
+                            src="/assets/main_logo.png"
                             alt="Solog Logo"
-                            style={{ width: 100, height: 64 }} // 적절한 크기로 조정
+                            style={{ width: 110, height: 60 }}
                         />
                     </IconButton>
                 </Box>
-                <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                    <Button
-                        variant="contained"
-                        sx={naviButtonStyle}
-                        onClick={() => navigate("/kibana")}
-                    >
-                        Kibana
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        gap: 8,
+                        alignItems: "center",
+                        pr: 4,
+                    }}
+                >
+                    <Button sx={naviButtonStyle} onClick={() => navigate("/kibana")}>
+                        Show Log Info
                     </Button>
-                    <Button
-                        variant="contained"
-                        sx={naviButtonStyle}
-                        onClick={() => navigate("/grafana")}
-                    >
-                        Grafana
+                    <Button sx={naviButtonStyle} onClick={() => navigate("/grafana")}>
+                        Show Metric Info
                     </Button>
-                    <Button
-                        variant="contained"
-                        sx={naviButtonStyle}
-                        onClick={() => navigate("/ai")}
-                    >
-                        AI 분석
+                    <Button sx={naviButtonStyle} onClick={() => navigate("/ai")}>
+                        Alert&AI
                     </Button>
                 </Box>
             </Toolbar>
         </AppBar>
-
     );
 }
