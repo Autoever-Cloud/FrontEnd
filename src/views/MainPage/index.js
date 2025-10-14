@@ -17,7 +17,7 @@ const MainContainer = styled.div`
     background-color: #003c88;
     color: white;
     overflow: hidden;
-    min-height: 92vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
