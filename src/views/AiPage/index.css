@@ -1,0 +1,104 @@
+/* src/Dashboard.css (Updated for View Transition) */
+:root {
+    --bg-color: #0d1b2a;
+    --main-bg: #ffffff;
+    --sidebar-bg: #e0e1dd;
+    --notification-bg: #ffffff;
+    --text-color: #1b263b;
+    --border-color: #d3d3d3;
+    --accent-color: #0077b6;
+    --transition-speed: 0.5s; /* 애니메이션 속도를 변수로 관리 */
+}
+
+/* --- (중략) --- body, container, main-content 등 이전과 동일한 스타일 --- */
+body, html { margin: 0; padding: 0; height: 100%; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background-color: var(--bg-color); }
+.container { display: flex; height: 100vh; box-sizing: border-box; padding: 40px; gap: 20px; }
+.main-content { flex: 6; background-color: var(--main-bg); border-radius: 8px; padding: 40px; overflow-y: auto; color: var(--text-color); }
+.main-content h1 { font-size: 2em; margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+.content-section { margin-bottom: 30px; }
+.content-section h3 { font-size: 1.2em; color: var(--accent-color); margin-bottom: 10px; }
+.content-section pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-family: 'Consolas', 'Courier New', monospace; }
+.content-section ul { padding-left: 20px; line-height: 1.6; }
+.notification-item { background-color: var(--notification-bg); padding: 15px; margin-bottom: 10px; border-radius: 5px; border-left: 5px solid var(--border-color); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.notification-item:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.notification-item.active { border-left-color: var(--accent-color); font-weight: bold; }
+.notification-title { font-size: 1em; margin-bottom: 5px; }
+.notification-time { font-size: 0.8em; color: #666; }
+/* --- (여기까지) --- */
+
+/* [수정됨] 오른쪽 사이드바 박스 */
+.sidebar-wrapper {
+    flex: 4;
+    position: relative; /* 자식 요소(.sidebar-button)의 기준점 */
+    background-color: var(--sidebar-bg);
+    border-radius: 8px;
+    overflow: hidden; /* 내부 컨테이너들이 둥근 모서리를 넘어가지 않도록 함 */
+}
+
+/* [추가] 알림 목록과 AI 챗 컨테이너의 기본 스타일 */
+.notification-sidebar, .ai-chat-container {
+    position: absolute; /* 두 요소를 겹치게 배치 */
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+/* [추가] 평소에는 AI 챗 컨테이너를 오른쪽으로 밀어내고 투명하게 만듦 */
+.ai-chat-container {
+    opacity: 0;
+    transform: translateX(100%);
+    z-index: 10; /* 전환 시 위로 올라오도록 설정 */
+}
+
+/* [추가] chat-view-active 상태일 때의 스타일 변화 */
+.sidebar-wrapper.chat-view-active .notification-sidebar {
+    opacity: 0;
+    transform: translateX(-100%); /* 알림 목록은 왼쪽으로 사라짐 */
+}
+.sidebar-wrapper.chat-view-active .ai-chat-container {
+    opacity: 1;
+    transform: translateX(0); /* AI 챗은 제자리로 돌아옴 */
+}
+
+/* [수정됨] 토글 버튼 */
+.sidebar-button {
+    position: absolute;
+    top: 50%;
+    /* 기본 위치는 오른쪽 */
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 4px solid var(--bg-color);
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    user-select: none;
+    z-index: 20; /* 항상 최상단에 위치 */
+    /* [추가] 위치 변경에 대한 부드러운 전환 효과 */
+    transition: right var(--transition-speed) ease, left var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+/* [추가] chat-view-active 상태일 때 버튼의 위치 */
+.sidebar-wrapper.chat-view-active .sidebar-button {
+    right: auto; /* 기존 right 속성 해제 */
+    left: 0; /* 왼쪽 경계선에 붙임 */
+    transform: translate(-50%, -50%); /* 왼쪽 중앙 정렬 */
+}
+
+.button-arrow {
+    font-size: 24px;
+    line-height: 1;
+}
+.button-text {
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 2px;
+}
