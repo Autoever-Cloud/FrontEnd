@@ -1,19 +1,19 @@
 /* src/Dashboard.css (Updated for View Transition) */
 :root {
-    --bg-color: #0d1b2a;
+    --bg-color: #003c88;
     --main-bg: #ffffff;
     --sidebar-bg: #e0e1dd;
     --notification-bg: #ffffff;
     --text-color: #1b263b;
     --border-color: #d3d3d3;
-    --accent-color: #0077b6;
-    --transition-speed: 0.5s; /* 애니메이션 속도를 변수로 관리 */
+    --accent-color: #003c88;
+    --transition-speed: 1.0s; /* 애니메이션 속도를 변수로 관리 */
 }
 
 /* --- (중략) --- body, container, main-content 등 이전과 동일한 스타일 --- */
 body, html { margin: 0; padding: 0; height: 100%; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; background-color: var(--bg-color); }
 .container { display: flex; height: 100vh; box-sizing: border-box; padding: 40px; gap: 20px; }
-.main-content { flex: 6; background-color: var(--main-bg); border-radius: 8px; padding: 40px; overflow-y: auto; color: var(--text-color); }
+.main-content { flex: 6; background-color: var(--main-bg); border-radius: 8px; padding: 40px; overflow-y: auto; scrollbar-width: none; color: var(--text-color); }
 .main-content h1 { font-size: 2em; margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
 .content-section { margin-bottom: 30px; }
 .content-section h3 { font-size: 1.2em; color: var(--accent-color); margin-bottom: 10px; }
@@ -24,79 +24,94 @@ body, html { margin: 0; padding: 0; height: 100%; font-family: 'Malgun Gothic', 
 .notification-item.active { border-left-color: var(--accent-color); font-weight: bold; }
 .notification-title { font-size: 1em; margin-bottom: 5px; }
 .notification-time { font-size: 0.8em; color: #666; }
-/* --- (여기까지) --- */
 
-/* [수정됨] 오른쪽 사이드바 박스 */
-.sidebar-wrapper {
+/* 1. 사이드바의 프레임 역할 */
+.sidebar-container {
     flex: 4;
-    position: relative; /* 자식 요소(.sidebar-button)의 기준점 */
+    position: relative;
     background-color: var(--sidebar-bg);
     border-radius: 8px;
-    overflow: hidden; /* 내부 컨테이너들이 둥근 모서리를 넘어가지 않도록 함 */
+    /* 핵심: 이 컨테이너 밖으로 나가는 모든 내용을 숨깁니다. */
+    overflow: hidden; align-self: auto;
 }
 
-/* [추가] 알림 목록과 AI 챗 컨테이너의 기본 스타일 */
-.notification-sidebar, .ai-chat-container {
-    position: absolute; /* 두 요소를 겹치게 배치 */
-    width: 100%;
+/* 2. 실제 좌우로 움직일 슬라이딩 영역 */
+.sidebar-sliding-wrapper {
+    display: flex; /* 두 개의 뷰를 가로로 나란히 배치 */
+    width: 200%;   /* 두 뷰의 넓이를 합친 값 (각각 100%씩 차지) */
     height: 100%;
-    opacity: 1;
-    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+    transition: transform var(--transition-speed) ease-in-out;
 }
 
-/* [추가] 평소에는 AI 챗 컨테이너를 오른쪽으로 밀어내고 투명하게 만듦 */
-.ai-chat-container {
-    opacity: 0;
-    transform: translateX(100%);
-    z-index: 10; /* 전환 시 위로 올라오도록 설정 */
+/* 3. 각 화면(뷰) 스타일 */
+.notification-sidebar, .ai-chat-container {
+    width: 50%; /* wrapper 너비의 절반, 즉 컨테이너의 100% */
+    height: 100%;
+    /* 개별적인 transition, transform, position 속성 제거 */
 }
 
-/* [추가] chat-view-active 상태일 때의 스타일 변화 */
-.sidebar-wrapper.chat-view-active .notification-sidebar {
-    opacity: 0;
-    transform: translateX(-100%); /* 알림 목록은 왼쪽으로 사라짐 */
-}
-.sidebar-wrapper.chat-view-active .ai-chat-container {
-    opacity: 1;
-    transform: translateX(0); /* AI 챗은 제자리로 돌아옴 */
+/* 4. 'chat-view' 활성화 시 슬라이딩 wrapper를 왼쪽으로 50% 이동 */
+.sidebar-container.chat-view-active .sidebar-sliding-wrapper {
+    transform: translateX(-50%);
 }
 
-/* [수정됨] 토글 버튼 */
+
+/* --- 버튼 스타일 --- */
+
 .sidebar-button {
     position: absolute;
     top: 50%;
-    /* 기본 위치는 오른쪽 */
-    right: 0;
-    transform: translate(50%, -50%);
-    width: 65px;
+    /* 기본 위치: 오른쪽 끝 (left 100%) */
+    left: 100%; 
+    transform: translate(-50%, -50%); /* 버튼 크기의 절반만큼 이동하여 정중앙에 위치 */
+    
+    width: 65px; 
     height: 65px;
-    border-radius: 50%;
+    border-radius: 50%; 
     border: 4px solid var(--bg-color);
-    background-color: var(--main-bg);
+    background-color: var(--main-bg); 
     color: var(--text-color);
-    display: flex;
+    
+    display: flex; 
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
+    
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     user-select: none;
-    z-index: 20; /* 항상 최상단에 위치 */
-    /* [추가] 위치 변경에 대한 부드러운 전환 효과 */
-    transition: right var(--transition-speed) ease, left var(--transition-speed) ease, transform var(--transition-speed) ease;
+    z-index: 20;
+    
+    /* 핵심: left와 transform 속성 변화에 애니메이션 적용 */
+    transition: left var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
 }
 
-/* [추가] chat-view-active 상태일 때 버튼의 위치 */
-.sidebar-wrapper.chat-view-active .sidebar-button {
-    right: auto; /* 기존 right 속성 해제 */
-    left: 0; /* 왼쪽 경계선에 붙임 */
-    transform: translate(-50%, -50%); /* 왼쪽 중앙 정렬 */
+/* 'chat-view' 활성화 시 버튼 위치를 왼쪽 끝(left 0%)으로 이동 */
+.sidebar-container.chat-view-active .sidebar-button {
+    left: 0%;
+}
+
+/* --- 버튼 내부 화살표 스타일 (가독성을 위해 정리) --- */
+
+.button-arrow-wrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
 }
 
 .button-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
     font-size: 24px;
-    line-height: 1;
+    /* 딜레이를 주어 화면 전환 후 화살표가 바뀌도록 설정 */
+    transition: opacity 0.1s ease-in-out var(--transition-speed);
 }
+
+.arrow-right { opacity: 0; }
+.sidebar-container.chat-view-active .arrow-left { opacity: 0; }
+.sidebar-container.chat-view-active .arrow-right { opacity: 1; }
+
 .button-text {
     font-size: 11px;
     font-weight: bold;
