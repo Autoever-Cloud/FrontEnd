@@ -1,138 +1,116 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-// 🔹 기본 페이드인 애니메이션
-const fadeInUp = keyframes`
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`;
-
-// 🔹 왼쪽 텍스트 슬라이드 인
-const fadeInLeft = keyframes`
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-`;
-
-// 🔹 오른쪽 텍스트 슬라이드 인
+/* 🔹 애니메이션 정의 */
 const fadeInRight = keyframes`
-    0% {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
 `;
 
-// 🔹 아래쪽 로고 영역 페이드 인
 const fadeIn = keyframes`
     0% { opacity: 0; }
     100% { opacity: 1; }
 `;
 
+/* 🔹 메인 컨테이너 */
 const MainContainer = styled.div`
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-`;
-
-const Section = styled.section`
-    height: 100vh;
+    background-color: #003c88;
+    color: white;
+    overflow: hidden;
+    min-height: 92vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    font-size: 48px;
-    font-weight: bold;
-    color: white;
+    position: relative;
 `;
 
-/* =======================================================
-   ✅ 배너1 : SOLOg – 데이터센터 지킴이
-   ======================================================= */
-const Banner1 = styled(Section)`
-  background-color: #003c88;
-  color: white;
-  position: relative;
-  padding: 0 8%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  overflow: hidden;
+const Layout = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    width: 100%;
+`;
 
-  .left {
+/* 🔹 왼쪽 로고 */
+const Left = styled.div`
     flex: 1;
-    animation: ${fadeInLeft} 1.2s ease forwards;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: ${fadeIn} 1.2s ease forwards;
 
-  .right {
+    img {
+        width: 80%;
+        max-width: 550px;
+        height: auto;
+    }
+`;
+
+/* 🔹 오른쪽 */
+const Right = styled.div`
     flex: 1;
+    position: relative;
     animation: ${fadeInRight} 1.4s ease forwards;
-  }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* ✅ 세로 중앙 정렬로 교체 */
+    margin-top: -360px; /* ✅ 전체를 위로 끌어올림 */
+`;
 
-  .title {
-    font-size: 100px;
-    font-weight: 900;
-    color: #ffffff;
-    text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3),
-                 3px 3px 0px #2b60c5; /* 흰 글자 그림자 + 파란 하이라이트 */
-    margin: 0;
-    animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 0.6s;
-  }
-
-  .subtitle {
-    font-size: 32px;
-    font-weight: 700;
-    margin-top: 10px;
-    color: #ffffff;
-    animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 1.4s;
-  }
-
-  .im {
-    font-size: 36px;
-    font-weight: 700;
-    color: #bcdcff;
-    margin-bottom: 10px;
-    animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 0.2s;
-  }
-
-  .desc {
-    font-size: 20px;
-    line-height: 1.8;
-    color: #f0f0f0;
-    opacity: 0;
-    animation: ${fadeInUp} 1s ease forwards;
-    ${({ delay }) =>
-    delay &&
-    css`
-        animation-delay: ${delay}s;
-      `}
-  }
-
-  .bottom {
+/* ✅ 뒷상자 */
+const BackBox = styled.div`
     position: absolute;
-    bottom: 70px;
+    top: -50px; /* ✅ 위로 올림 */
+    left: -20px; /* 왼쪽 약간 이동 */
     width: 85%;
-    left: 0;
+    height: 230px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+    transform: rotate(1.5deg);
+    transform-origin: center;
+    z-index: 1;
+    animation: ${fadeIn} 1.2s ease forwards;
+    animation-delay: 1s;
+`;
+
+/* ✅ 앞상자 (문구 들어가는 메인 카드) */
+const FrontBox = styled.div`
+    position: absolute;
+    top: 30px;
+    left: 90px;
+    width: 420px; /* ✅ 줄바꿈이 일정하게 되도록 폭 고정 */
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 38px 45px;
+    color: #f0f4ff;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.9;
+    text-align: left; /* ✅ 왼쪽 정렬 */
+    z-index: 2;
+    box-shadow: 8px 8px 28px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    animation: ${fadeIn} 1.4s ease forwards;
+    animation-delay: 1.3s;
+
+    p {
+        margin-bottom: 22px;
+        word-break: keep-all; /* ✅ 단어 단위 줄바꿈 */
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+`;
+
+/* 🔹 하단 로고 */
+const Bottom = styled.div`
+    position: absolute;
+    bottom: 35px;
+    width: 88%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -140,31 +118,30 @@ const Banner1 = styled(Section)`
     opacity: 0;
     animation: ${fadeIn} 1s ease forwards;
     animation-delay: 3.5s;
-  }
-
-  .logos {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-
-    img {
-      height: 48px;
-      filter: brightness(0) invert(1); /* 흰색 느낌 */
-    }
-  }
-
-  .team {
-    font-size: 16px;
-    color: #bcdcff;
-  }
 `;
 
-const Banner2 = styled(Section)`background-color: #4dabf7;`;
-const Banner3 = styled(Section)`background-color: #51cf66;`;
-const Banner4 = styled(Section)`background-color: #ffa94d;`;
+const Logos = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    img {
+        height: 50px;
+        filter: brightness(0) invert(1);
+    }
+    
+    img[alt="고용노동부"] {
+        height: 60px; /* 기존보다 20% 크게 */
+    }
+`;
+
+const TeamText = styled.div`
+    font-size: 16px;
+    color: #bcdcff;
+`;
 
 function MainPage() {
-    const banner1Ref = useRef(null);
+    const bannerRef = useRef(null);
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -174,55 +151,50 @@ function MainPage() {
             },
             { threshold: 0.5 }
         );
-
-        if (banner1Ref.current) observer.observe(banner1Ref.current);
+        if (bannerRef.current) observer.observe(bannerRef.current);
         return () => observer.disconnect();
     }, []);
 
     return (
-        <MainContainer>
-            <Banner1 ref={banner1Ref} isVisible={visible}>
-                {/* ✅ 왼쪽 영역 */}
-                <div className="left">
-                    <div className="im">I'm</div>
-                    <h1 className="title">SOLOg</h1>
-                    <h2 className="subtitle">– 데이터센터 지킴이</h2>
-                </div>
+        <MainContainer ref={bannerRef}>
+            <Layout>
+                {/* ✅ 왼쪽 이미지 */}
+                <Left>
+                    <img
+                        src="/assets/mainpagelogo.png"
+                        alt="I'm SOLOg – 데이터센터 지킴이"
+                    />
+                </Left>
 
-                {/* ✅ 오른쪽 설명 */}
-                <div className="right">
-                    <p className="desc" style={{ animationDelay: "1.8s" }}>
-                        SOLOg는 Log 데이터를 활용해 문제 해결(SOLVE)을 보조하는 통합 시각화, 알림 서비스입니다.
-                    </p>
-                    <p className="desc" style={{ animationDelay: "2.3s" }}>
-                        Kibana를 통한 로그 정보 모니터링, Grafana를 통한 매트릭 모니터링 기능을 제공합니다.
-                    </p>
-                    <p className="desc" style={{ animationDelay: "2.8s" }}>
-                        사전 정의된 규칙에 따라 발생된 알림을 모아 확인하고 AI의 조언과 함께 문제 해결의 첫걸음을 시작하세요.
-                    </p>
-                </div>
+                {/* ✅ 오른쪽: 두 상자 구성 (엇갈림) */}
+                <Right>
+                    <BackBox />
+                    <FrontBox>
+                        <p>
+                            SOLOg는 Log 데이터를 활용해 문제 해결(SOLVE)을 보조하는 <br />
+                            통합 시각화, 알림 서비스입니다.
+                        </p>
+                        <p>
+                            Kibana를 통한 로그 정보 모니터링, <br />
+                            Grafana를 통한 매트릭 모니터링 기능을 제공합니다.
+                        </p>
+                        <p>
+                            사전 정의된 규칙에 따라 발생된 알림을 모아 확인하고 <br />
+                            AI의 조언과 함께 문제 해결의 첫걸음을 시작하세요.
+                        </p>
+                    </FrontBox>
+                </Right>
+            </Layout>
 
-                {/* ✅ 하단 로고 + 문의 */}
-                <div className="bottom">
-                    <div className="logos">
-                        <img src="/assets/logo_moel.png" alt="고용노동부" />
-                        <img src="/assets/logo_autoever.png" alt="현대오토에버" />
-                        <img src="/assets/logo_rapa.png" alt="RAPA" />
-                    </div>
-                    <div className="team">© Team j4s | 문의: autoeversolog@gmail.com</div>
-                </div>
-            </Banner1>
-
-            {/* 나머지 배너 그대로 */}
-            <Banner2>
-                <h1>배너2</h1>
-            </Banner2>
-            <Banner3>
-                <h1>배너3</h1>
-            </Banner3>
-            <Banner4>
-                <h1>배너4</h1>
-            </Banner4>
+            {/* ✅ 하단 */}
+            <Bottom>
+                <Logos>
+                    <img src="/assets/logo_moel.png" alt="고용노동부" />
+                    <img src="/assets/logo_autoever.png" alt="현대오토에버" />
+                    <img src="/assets/logo_rapa.png" alt="RAPA" />
+                </Logos>
+                <TeamText>© Team j4s | 문의: autoeversolog@gmail.com</TeamText>
+            </Bottom>
         </MainContainer>
     );
 }
