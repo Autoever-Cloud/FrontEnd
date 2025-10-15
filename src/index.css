@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ai-markdown h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.ai-markdown ul {
+  padding-left: 1.5rem;
+}
+.ai-markdown li {
+  margin-bottom: 0.5rem;
+}

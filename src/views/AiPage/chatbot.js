@@ -35,6 +35,8 @@ export default function Chatbot() {
 
   return (
     // ... (return 하는 JSX 코드는 변경 없음)
-    <div style={styles.chatSection}> <div style={styles.chatWindow} ref={chatContainerRef}> {messages.map((msg, index) => ( <div key={index} style={{ ...styles.message, ...(msg.sender === "user" ? styles.userMessage : styles.aiMessage), }} > {msg.text} </div> ))} {isLoading && ( <div style={{ ...styles.message, ...styles.aiMessage }}> 답변을 생성 중입니다... </div> )} </div> <form onSubmit={handleSubmit} style={styles.form}> <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="AI에게 무엇이든 물어보세요..." style={styles.input} disabled={isLoading} /> <button type="submit" style={styles.button} disabled={isLoading}> 전송 </button> </form> </div>
+    <div style={styles.chatSection}>
+      <div style={styles.chatWindow} ref={chatContainerRef}>
+        {messages.map((msg, index) => ( <div key={index} style={{ ...styles.message, ...(msg.sender === "user" ? styles.userMessage : styles.aiMessage), }} > {msg.text} </div> ))} {isLoading && ( <div style={{ ...styles.message, ...styles.aiMessage }}> 답변을 생성 중입니다... </div> )} </div> <form onSubmit={handleSubmit} style={styles.form}> <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="AI에게 무엇이든 물어보세요..." style={styles.input} disabled={isLoading} /> <button type="submit" style={styles.button} disabled={isLoading}> 전송 </button> </form> </div>
   );
 }
