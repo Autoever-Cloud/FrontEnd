@@ -1,0 +1,38 @@
+// src/contexts/SseContext.js
+import React, { createContext, useState, useEffect } from "react";
+
+export const SseContext = createContext();
+
+export const SseProvider = ({ children }) => {
+    const [notifications, setNotifications] = useState([]);
+    const [aiCache, setAiCache] = useState({});
+
+    useEffect(() => {
+        const eventSource = new EventSource("http://localhost:8080/api/connect");
+
+        eventSource.addEventListener("log", (event) => {
+            try {
+                const newLogObject = JSON.parse(event.data);
+                setNotifications((prev) => {
+                    // 중복 방지
+                    if (prev.some((n) => n.id === newLogObject.id)) return prev;
+                    return [newLogObject, ...prev];
+                });
+            } catch (error) {
+                console.error("SSE 데이터 파싱 실패:", event.data, error);
+            }
+        });
+
+        eventSource.onerror = (error) => console.error("SSE 에러:", error);
+
+        return () => {
+            eventSource.close();
+        };
+    }, []);
+
+    return (
+        <SseContext.Provider value={{ notifications, setNotifications, aiCache, setAiCache }}>
+            {children}
+        </SseContext.Provider>
+    );
+};
