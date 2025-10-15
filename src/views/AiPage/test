@@ -1,0 +1,51 @@
+export function data() {
+  const dummyData = [
+    {
+      id: 2,
+      notificationTitle: "[Prometheus] Memory 사용량 85% 초과",
+      notificationTime: "2025.10.12 09:45:11",
+      content: {
+        title: "[주의] Prometheus 서버 메모리 사용량 임계치 근접",
+        timestamp: "2025-10-12 09:45:11 UTC",
+        alertTime: "2025-10-12 09:45:10.123456789 UTC",
+        log: `{ "alert_name": "High Memory Usage", "instance": "prometheus-server", "value": 86.1, "threshold": 85.0 }`,
+        details:
+          "인스턴스: prometheus-server\n현재 Memory 사용률: 86.1%\n요약: High Memory Usage Notification",
+        guide: [
+          "메모리 누수(Memory Leak)가 의심되는 프로세스를 확인하세요.",
+          "메모리 할당량(request/limit)이 적절한지 검토하세요.",
+          "장기적으로 메모리 용량 증설 계획을 수립하세요.",
+        ],
+      },
+    },
+    // ... 다른 더미 데이터 추가 가능
+  ];
+  return dummyData;
+}
+
+export function data1() {
+  const sseUrl = "http://localhost:8080/api/connect"; // 백엔드 주소 확인!
+
+  // 2. EventSource 객체 생성으로 SSE 연결 시작
+  const eventSource = new EventSource(sseUrl);
+  var logs = null
+
+  // 3. 연결 성공 시
+  eventSource.onopen = () => {
+    console.log("SSE connection opened!");
+    console.log("!!!!!!!!성공")
+  };
+
+  // 4. 'log' 이벤트 수신 시
+  eventSource.addEventListener("log", (event) => {
+    const newLog = event.data;
+    logs = newLog
+    console.log(newLog)
+  });
+
+  // 5. 에러 발생 시
+  eventSource.onerror = (error) => {
+    console.error("SSE Error:", error);
+  };
+  return logs;
+}
