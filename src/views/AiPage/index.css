@@ -33,6 +33,7 @@ body, html { margin: 0; padding: 0; height: 100%; font-family: 'Malgun Gothic', 
     border-radius: 8px;
     /* 핵심: 이 컨테이너 밖으로 나가는 모든 내용을 숨깁니다. */
     overflow: hidden; align-self: auto;
+    padding: 10px;
 }
 
 /* 2. 실제 좌우로 움직일 슬라이딩 영역 */
