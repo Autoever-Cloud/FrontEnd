@@ -6,7 +6,7 @@ export const SseContext = createContext();
 export const SseProvider = ({ children }) => {
     const [notifications, setNotifications] = useState([]);
     const [aiCache, setAiCache] = useState({});
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const API_BASE_URL = process.env.REACT_APP_PROD_BASE_URL;
 
     useEffect(() => {
         const eventSource = new EventSource(`${API_BASE_URL}/api/connect`);

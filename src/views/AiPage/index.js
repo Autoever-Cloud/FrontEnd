@@ -12,7 +12,7 @@ export default function AiChat() {
   const [isLoading, setIsLoading] = useState(false);
 
   const selectedNotification = notifications.find((n) => n.id === selectedId);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const API_BASE_URL = process.env.REACT_APP_PROD_BASE_URL;
 
   const handleNotificationClick = async (id) => {
     if (isLoading) return;
