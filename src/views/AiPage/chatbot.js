@@ -64,6 +64,7 @@ export default function Chatbot() {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef(null);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,7 +78,7 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8080/api/solog/chatbot", {
+      const response = await fetch(`${API_BASE_URL}/api/solog/chatbot`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: currentInput }),

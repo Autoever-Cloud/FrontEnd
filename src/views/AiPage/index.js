@@ -12,6 +12,7 @@ export default function AiChat() {
   const [isLoading, setIsLoading] = useState(false);
 
   const selectedNotification = notifications.find((n) => n.id === selectedId);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handleNotificationClick = async (id) => {
     if (isLoading) return;
@@ -28,7 +29,7 @@ export default function AiChat() {
 
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/solog", {
+      const response = await fetch(`${API_BASE_URL}/api/solog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: JSON.stringify(target.content.log) }),
@@ -66,7 +67,6 @@ export default function AiChat() {
                   <pre>
                 {JSON.stringify(selectedNotification.content.log, null, 2)}
               </pre>
-                  <hr />
                 </>
             )}
 

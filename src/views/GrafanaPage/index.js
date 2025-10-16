@@ -3,16 +3,16 @@ import React, { useEffect, useState } from "react";
 export default function GrafanaPage() {
     const [embedUrl, setEmbedUrl] = useState(null);
     const dashboardUid = "infra-service-observability-full";
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     useEffect(() => {
-        // ✅ 백엔드에서 URL 문자열 받아오기
-        fetch(`http://localhost:8080/api/grafana/embed/${dashboardUid}`)
+        fetch(`${API_BASE_URL}/api/grafana/embed/${dashboardUid}`)
             .then((res) => res.text())
             .then((url) => {
-                console.log("✅ 받아온 embed URL:", url);
+                console.log("받아온 embed URL:", url);
                 setEmbedUrl(url); // 이 URL을 iframe src로 써야 함
             })
-            .catch((err) => console.error("❌ Failed to load dashboard:", err));
+            .catch((err) => console.error("Failed to load dashboard:", err));
     }, []);
 
     if (!embedUrl) return <p>Loading dashboard...</p>;
@@ -21,7 +21,7 @@ export default function GrafanaPage() {
         <div style={{ width: "100%", height: "100vh" }}>
             <h2>📊 Grafana 대시보드</h2>
             <iframe
-                src={embedUrl} // ✅ 여기서 사용!
+                src={embedUrl}
                 width="100%"
                 height="90%"
                 frameBorder="0"
