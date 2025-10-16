@@ -2,60 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import "./index.css";
-
-const styles = {
-  chatSection: {
-    width: "100%",
-    height: "100%",
-    padding: "20px",
-    display: "flex",
-    flexDirection: "column",
-    boxSizing: "border-box",
-  },
-  chatWindow: {
-    flexGrow: 1,
-    overflowY: "auto",
-    marginBottom: "20px",
-  },
-  message: {
-    padding: "10px",
-    borderRadius: "10px",
-    marginBottom: "10px",
-    maxWidth: "80%",
-    wordWrap: "break-word",
-    display: "flex",
-    flexDirection: "column",
-  },
-  userMessage: {
-    backgroundColor: "#007bff",
-    color: "white",
-    alignSelf: "flex-end",
-    marginLeft: "auto",
-  },
-  aiMessage: {
-    backgroundColor: "#e9e9eb",
-    color: "black",
-    alignSelf: "flex-start",
-  },
-  form: {
-    display: "flex",
-  },
-  input: {
-    flexGrow: 1,
-    padding: "10px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  },
-  button: {
-    padding: "10px 15px",
-    marginLeft: "10px",
-    borderRadius: "5px",
-    border: "none",
-    backgroundColor: "#007bff",
-    color: "white",
-    cursor: "pointer",
-  },
-};
+import "./chatbot.css";
 
 export default function Chatbot() {
   const [userInput, setUserInput] = useState("");
@@ -112,48 +59,44 @@ export default function Chatbot() {
   }, [messages, isLoading]);
 
   return (
-      <div style={styles.chatSection}>
-        <div style={styles.chatWindow} ref={chatContainerRef}>
-          {messages.map((msg, index) => (
-              <div
-                  key={index}
-                  style={{
-                    ...styles.message,
-                    ...(msg.sender === "user"
-                        ? styles.userMessage
-                        : styles.aiMessage),
-                  }}
-              >
-                {msg.isMarkdown ? (
-                    <div className="ai-markdown">
-                      <ReactMarkdown>{msg.text}</ReactMarkdown>
-                    </div>
-                ) : (
-                    msg.text
-                )}
+    <div className="chat-section">
+      <div className="chat-window" ref={chatContainerRef}>
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`message ${
+              msg.sender === "user" ? "user-message" : "ai-message"
+            }`}
+          >
+            {msg.isMarkdown ? (
+              <div className="ai-markdown">
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
               </div>
-          ))}
+            ) : (
+              msg.text
+            )}
+          </div>
+        ))}
 
-          {isLoading && (
-              <div style={{ ...styles.message, ...styles.aiMessage }}>
-                답변을 생성 중입니다...
-              </div>
-          )}
-        </div>
-
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <input
-              type="text"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="AI에게 무엇이든 물어보세요..."
-              style={styles.input}
-              disabled={isLoading}
-          />
-          <button type="submit" style={styles.button} disabled={isLoading}>
-            전송
-          </button>
-        </form>
+        {isLoading && (
+          <div className="message ai-message">답변을 생성 중입니다...</div>
+        )}
       </div>
+
+      <form onSubmit={handleSubmit} className="form">
+        <input
+          type="text"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          placeholder="AI에게 무엇이든 물어보세요..."
+          className="input"
+          disabled={isLoading}
+        />
+        <button type="submit" className="button" disabled={isLoading}>
+          전송
+        </button>
+      </form>
+    </div>
   );
+
 }
