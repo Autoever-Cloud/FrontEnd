@@ -1,5 +1,7 @@
 // Chatbot.js
 import React, { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import "./index.css";
 
 const styles = {
   chatSection: {
@@ -75,7 +77,6 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      // 2️⃣ 백엔드 API 호출
       const response = await fetch("http://localhost:8080/api/solog/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -88,7 +89,7 @@ export default function Chatbot() {
 
       const data = await response.json();
 
-      const aiMessage = { text: data.response, sender: "ai" };
+      const aiMessage = { text: data.response, sender: "ai", isMarkdown: true };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error("API 호출 오류:", error);
@@ -122,7 +123,13 @@ export default function Chatbot() {
                         : styles.aiMessage),
                   }}
               >
-                {msg.text}
+                {msg.isMarkdown ? (
+                    <div className="ai-markdown">
+                      <ReactMarkdown>{msg.text}</ReactMarkdown>
+                    </div>
+                ) : (
+                    msg.text
+                )}
               </div>
           ))}
 
