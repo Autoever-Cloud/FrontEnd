@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function GrafanaPage() {
     const [embedUrl, setEmbedUrl] = useState(null);
     const dashboardUid = "infra-service-observability-full";
-    const API_BASE_URL = process.env.REACT_APP_PROD_BASE_URL;
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/api/grafana/embed/${dashboardUid}`)
@@ -18,8 +18,28 @@ export default function GrafanaPage() {
     if (!embedUrl) return <p>Loading dashboard...</p>;
 
     return (
-        <div style={{ width: "100%", height: "100vh" }}>
-            <h2>📊 Grafana 대시보드</h2>
+        <div
+            style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                paddingTop: "40px",
+            }}
+        >
+            <h2
+                style={{
+                    marginBottom: "30px",
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: "2rem",
+                    letterSpacing: "1px",
+                }}
+            >
+                📊 Grafana 대시보드
+            </h2>
             <iframe
                 src={embedUrl}
                 width="100%"
