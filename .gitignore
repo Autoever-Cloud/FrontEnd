@@ -14,9 +14,9 @@
 # misc
 .DS_Store
 .env
-.env.production
+.env_production
 !.env.production
-.env.development
+.env_development
 !.env.development
 
 npm-debug.log*

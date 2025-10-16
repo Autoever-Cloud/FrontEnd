@@ -13,7 +13,16 @@ export const SseProvider = ({ children }) => {
 
         eventSource.addEventListener("log", (event) => {
             try {
-                const newLogObject = JSON.parse(event.data);
+                var newLogObject = JSON.parse(event.data);
+                const message_json_parsed = JSON.parse(newLogObject.message)
+                
+                newLogObject.timestamp = message_json_parsed.timestamp
+                if(newLogObject.timestamp==null){
+                    newLogObject.timestamp = message_json_parsed['@timestamp_kst']
+                }
+                if(newLogObject.timestamp==null){
+                    newLogObject.timestamp = message_json_parsed['@timestamp']
+                }
                 setNotifications((prev) => {
                     // 중복 방지
                     if (prev.some((n) => n.id === newLogObject.id)) return prev;

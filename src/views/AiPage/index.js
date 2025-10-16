@@ -112,8 +112,9 @@ export default function AiChat() {
                                     : "auto",
                           }}
                       >
-                        <div className="notification-title">{item.notificationTitle}</div>
-                        <div className="notification-time">{item.notificationTime}</div>
+                        <div className="notification-title">{item.subject}</div>
+                        <div className="notification-time">{item.timestamp}</div>
+
                       </div>
                   ))
               )}
