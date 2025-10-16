@@ -23,6 +23,10 @@ export const SseProvider = ({ children }) => {
                 if(newLogObject.timestamp==null){
                     newLogObject.timestamp = message_json_parsed['@timestamp']
                 }
+
+                newLogObject.timestamp = newLogObject.timestamp.slice(0, 19).replace('T', ' ');
+
+
                 setNotifications((prev) => {
                     // 중복 방지
                     if (prev.some((n) => n.id === newLogObject.id)) return prev;

@@ -56,6 +56,7 @@ body, html { margin: 0; padding: 0; height: 100%; font-family: 'Malgun Gothic', 
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    scrollbar-width: none;
     box-sizing: border-box;
 }
 
@@ -154,4 +155,8 @@ body, html { margin: 0; padding: 0; height: 100%; font-family: 'Malgun Gothic', 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.log-box {
+  text-align: left;
 }

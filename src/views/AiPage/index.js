@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import "./index.css";
 import Chatbot from "./chatbot";
 import {SseContext} from "../../contexts/SseContext";
+import PrettyJsonViewer from './util';
 
 export default function AiChat() {
   const { notifications, aiCache, setAiCache } = useContext(SseContext);
@@ -32,7 +33,7 @@ export default function AiChat() {
       const response = await fetch(`${API_BASE_URL}/api/solog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: JSON.stringify(target.content.log) }),
+        body: JSON.stringify({ prompt: JSON.stringify(target.message) }),
       });
 
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -54,6 +55,7 @@ export default function AiChat() {
   const handleToggleView = () =>
       setViewMode((prev) => (prev === "notifications" ? "chat" : "notifications"));
 
+
   return (
       <div className="container">
         {/* 왼쪽 영역: AI 분석 결과 */}
@@ -64,24 +66,24 @@ export default function AiChat() {
             {selectedNotification && (
                 <>
                   <h3>📜 감지된 로그</h3>
-                  <pre>
-                {JSON.stringify(selectedNotification.content.log, null, 2)}
-              </pre>
+                  <pre className="log-box">
+                    <PrettyJsonViewer data={selectedNotification.message} />
+                  </pre>
                 </>
             )}
 
             <br />
             {isLoading ? (
-                <div className="loading-text">
-                  <span className="spinner"></span>
-                  <p>데이터 불러오는 중...</p>
-                </div>
+              <div className="loading-text">
+                <span className="spinner"></span>
+                <p>데이터 불러오는 중...</p>
+              </div>
             ) : aiResponse ? (
-                <div className="ai-markdown">
-                  <ReactMarkdown>{aiResponse}</ReactMarkdown>
-                </div>
+              <div className="ai-markdown">
+                <ReactMarkdown>{aiResponse}</ReactMarkdown>
+              </div>
             ) : (
-                <p>왼쪽 알림 중 하나를 선택하면 AI 분석 결과가 여기에 표시됩니다.</p>
+              <p>왼쪽 알림 중 하나를 선택하면 AI 분석 결과가 여기에 표시됩니다.</p>
             )}
           </div>
         </div>
