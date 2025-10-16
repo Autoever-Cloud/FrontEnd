@@ -134,7 +134,6 @@ export default function AiChat() {
               <span className="button-arrow arrow-left">←</span>
               <span className="button-arrow arrow-right">→</span>
             </div>
-            <span className="button-text">AI chat</span>
           </div>
         </div>
       </div>
