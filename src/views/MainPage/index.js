@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-/* 🔹 애니메이션 정의 */
+/* 애니메이션 정의 */
 const fadeInRight = keyframes`
     0% { opacity: 0; transform: translateX(50px); }
     100% { opacity: 1; transform: translateX(0); }
@@ -12,7 +12,7 @@ const fadeIn = keyframes`
     100% { opacity: 1; }
 `;
 
-/* 🔹 메인 컨테이너 */
+/* 메인 컨테이너 */
 const MainContainer = styled.div`
     background-color: #003c88;
     color: white;
@@ -32,7 +32,7 @@ const Layout = styled.div`
     width: 100%;
 `;
 
-/* 🔹 왼쪽 로고 */
+/* 왼쪽 로고 */
 const Left = styled.div`
     flex: 1;
     display: flex;
@@ -47,7 +47,7 @@ const Left = styled.div`
     }
 `;
 
-/* 🔹 오른쪽 */
+/* 오른쪽 */
 const Right = styled.div`
     flex: 1;
     position: relative;
@@ -58,7 +58,7 @@ const Right = styled.div`
     margin-top: -360px; /* ✅ 전체를 위로 끌어올림 */
 `;
 
-/* ✅ 뒷상자 */
+/* 뒷상자 */
 const BackBox = styled.div`
     position: absolute;
     top: -50px; /* ✅ 위로 올림 */
@@ -76,12 +76,12 @@ const BackBox = styled.div`
     animation-delay: 1s;
 `;
 
-/* ✅ 앞상자 (문구 들어가는 메인 카드) */
+/* 앞상자 */
 const FrontBox = styled.div`
     position: absolute;
     top: 30px;
     left: 90px;
-    width: 420px; /* ✅ 줄바꿈이 일정하게 되도록 폭 고정 */
+    width: 420px; 
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 6px;
     padding: 38px 45px;
@@ -89,7 +89,7 @@ const FrontBox = styled.div`
     font-size: 16px;
     font-weight: 600;
     line-height: 1.9;
-    text-align: left; /* ✅ 왼쪽 정렬 */
+    text-align: left; 
     z-index: 2;
     box-shadow: 8px 8px 28px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -99,14 +99,14 @@ const FrontBox = styled.div`
 
     p {
         margin-bottom: 22px;
-        word-break: keep-all; /* ✅ 단어 단위 줄바꿈 */
+        word-break: keep-all; 
     }
     p:last-child {
         margin-bottom: 0;
     }
 `;
 
-/* 🔹 하단 로고 */
+/* 하단 로고 */
 const Bottom = styled.div`
     position: absolute;
     bottom: 35px;
@@ -131,7 +131,7 @@ const Logos = styled.div`
     }
     
     img[alt="고용노동부"] {
-        height: 60px; /* 기존보다 20% 크게 */
+        height: 60px; 
     }
 `;
 
@@ -158,7 +158,6 @@ function MainPage() {
     return (
         <MainContainer ref={bannerRef}>
             <Layout>
-                {/* ✅ 왼쪽 이미지 */}
                 <Left>
                     <img
                         src="/assets/mainpagelogo.png"
@@ -166,7 +165,6 @@ function MainPage() {
                     />
                 </Left>
 
-                {/* ✅ 오른쪽: 두 상자 구성 (엇갈림) */}
                 <Right>
                     <BackBox />
                     <FrontBox>
@@ -186,7 +184,6 @@ function MainPage() {
                 </Right>
             </Layout>
 
-            {/* ✅ 하단 */}
             <Bottom>
                 <Logos>
                     <img src="/assets/logo_moel.png" alt="고용노동부" />

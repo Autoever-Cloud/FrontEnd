@@ -13,13 +13,11 @@ export default function AiChat() {
 
   const selectedNotification = notifications.find((n) => n.id === selectedId);
 
-  // 알림 클릭 시 백엔드로 log 전송
   const handleNotificationClick = async (id) => {
     if (isLoading) return;
     setSelectedId(id);
     setAiResponse(null);
 
-    // 이미 캐시에 있다면 API 호출 생략
     if (aiCache[id]) {
       setAiResponse(aiCache[id]);
       return;
@@ -88,7 +86,6 @@ export default function AiChat() {
           </div>
         </div>
 
-        {/* 오른쪽 사이드바 */}
         <div className={`sidebar-container ${viewMode === "chat" ? "chat-view-active" : ""}`}>
           <div className="sidebar-sliding-wrapper">
             <div className="notification-sidebar">
@@ -122,13 +119,11 @@ export default function AiChat() {
               )}
             </div>
 
-            {/* 기존 Chatbot 컴포넌트 */}
             <div className="ai-chat-container">
               <Chatbot />
             </div>
           </div>
 
-          {/* AI Chat 토글 버튼 */}
           <div className="sidebar-button" onClick={handleToggleView}>
             <div className="button-arrow-wrapper">
               <span className="button-arrow arrow-left">←</span>
@@ -140,7 +135,6 @@ export default function AiChat() {
   );
 }
 
-// 스타일 객체 (기존 그대로 유지)
 const styles = {
   pageContainer: {
     display: "flex",

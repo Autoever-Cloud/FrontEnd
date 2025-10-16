@@ -37,7 +37,6 @@ export default function data() {
             ]
         }
     },
-    // ... 다른 더미 데이터 추가 가능
 ];
     return (
         dummyData       
