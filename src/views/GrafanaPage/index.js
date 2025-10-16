@@ -42,7 +42,7 @@ export default function GrafanaPage() {
             </h2>
             <iframe
                 src={embedUrl}
-                width="100%"
+                width="95%"
                 height="90%"
                 frameBorder="0"
                 title="Grafana Dashboard"
