@@ -64,7 +64,7 @@ export default function Chatbot() {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef(null);
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const API_BASE_URL = process.env.REACT_APP_PROD_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
