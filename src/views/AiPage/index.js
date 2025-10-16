@@ -117,7 +117,6 @@ export default function AiChat() {
                       >
                         <div className="notification-title">{item.notificationTitle}</div>
                         <div className="notification-time">{item.notificationTime}</div>
-                        {aiCache[item.id] && <span className="cached-label">🧩 캐시됨</span>}
                       </div>
                   ))
               )}
