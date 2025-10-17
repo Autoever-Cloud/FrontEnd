@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 export default function GrafanaPage() {
     const [embedUrl, setEmbedUrl] = useState(null);
     const dashboardUid = "infra-service-observability-full";
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const API_BASE_URL = process.env.REACT_APP_PROD_BASE_URL;
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/api/grafana/embed/${dashboardUid}`)
