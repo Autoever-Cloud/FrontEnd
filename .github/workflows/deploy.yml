@@ -27,7 +27,7 @@ jobs:
         build-args: |
           REACT_APP_PROD_BASE_URL=${{ secrets.REACT_APP_PROD_BASE_URL }}
           REACT_APP_KIBANA_URL=${{ secrets.REACT_APP_KIBANA_URL }}
-
+        no-cache: true
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master 
       with:
