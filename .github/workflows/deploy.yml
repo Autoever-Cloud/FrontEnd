@@ -27,7 +27,7 @@ jobs:
         build-args: |
           REACT_APP_PROD_BASE_URL=${{ secrets.REACT_APP_PROD_BASE_URL }}
           REACT_APP_KIBANA_URL=${{ secrets.REACT_APP_KIBANA_URL }}
-        no-cache: true
+
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master 
       with:
@@ -35,14 +35,10 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}     
         key: ${{ secrets.EC2_SSH_KEY }}         
         script: |
-          # 7-1. 최신 이미지 pull
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app:latest
           
-          # 7-2. 기존 컨테이너 중지 (있으면)
           docker stop my-react-app-container || true
           
-          # 7-3. 기존 컨테이너 삭제 (있으면)
           docker rm my-react-app-container || true
           
-          # 7-4. 새 컨테이너 실행 (EC2의 80번 포트와 컨테이너의 80번 포트 연결)
           docker run -d -p 3000:3000 --name my-react-app-container ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app:latest
