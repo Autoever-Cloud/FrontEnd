@@ -45,4 +45,4 @@ jobs:
           docker rm my-react-app-container || true
           
           # 7-4. 새 컨테이너 실행 (EC2의 80번 포트와 컨테이너의 80번 포트 연결)
-          docker run -d -p 3000:3000 --name my-react-app-container ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app:latest
+          docker run -d -p 80:80 --name my-react-app-container ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app:latest
