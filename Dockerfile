@@ -1,0 +1,28 @@
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+ARG REACT_APP_PROD_BASE_URL
+ARG REACT_APP_KIBANA_URL
+
+ENV REACT_APP_PROD_BASE_URL=$REACT_APP_PROD_BASE_URL
+ENV REACT_APP_KIBANA_URL=$REACT_APP_KIBANA_URL
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+FROM nginx:1.23-alpine
+
+COPY --from=builder /app/build /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 3000
+
+CMD ["nginx", "-g", "daemon off;"]
