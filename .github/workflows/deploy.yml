@@ -27,7 +27,6 @@ jobs:
         build-args: |
           REACT_APP_PROD_BASE_URL=${{ secrets.REACT_APP_PROD_BASE_URL }}
           REACT_APP_KIBANA_URL=${{ secrets.REACT_APP_KIBANA_URL }}
-          REACT_APP_ARGOCD_URL=${{ secrets.REACT_APP_ARGOCD_URL }}
           REACT_APP_ARGOCD_DATACENTER_URL=${{ secrets.REACT_APP_ARGOCD_DATACENTER_URL }}
           REACT_APP_ARGOCD_KAFKA_URL=${{ secrets.REACT_APP_ARGOCD_KAFKA_URL }}
           REACT_APP_ARGOCD_LMV_URL=${{ secrets.REACT_APP_ARGOCD_LMV_URL }}
