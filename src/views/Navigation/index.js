@@ -4,12 +4,19 @@ import {
     Button,
     Box,
     IconButton,
+    Menu,
+    MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Navigation() {
     const navigate = useNavigate();
-    const argocd_url = `${process.env.REACT_APP_ARGOCD_URL}/`
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const datacenterUrl = process.env.REACT_APP_ARGOCD_DATACENTER_URL;
+    const kafkaUrl = process.env.REACT_APP_ARGOCD_KAFKA_URL;
+    const lmvUrl = process.env.REACT_APP_ARGOCD_LMV_URL;
 
     const naviButtonStyle = {
         bgcolor: "white",
@@ -25,6 +32,10 @@ export default function Navigation() {
         },
         textTransform: "none",
     };
+
+    // 드롭다운 열기 / 닫기
+    const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+    const handleMenuClose = () => setAnchorEl(null);
 
     return (
         <AppBar
@@ -42,6 +53,7 @@ export default function Navigation() {
                     px: 8,
                 }}
             >
+                {/* 왼쪽 로고 */}
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <IconButton
                         size="large"
@@ -59,6 +71,7 @@ export default function Navigation() {
                     </IconButton>
                 </Box>
 
+                {/* 오른쪽 네비게이션 */}
                 <Box
                     sx={{
                         display: "flex",
@@ -67,12 +80,101 @@ export default function Navigation() {
                         pr: 4,
                     }}
                 >
-                    <Button
-                        sx={naviButtonStyle}
-                        onClick={() => window.open(argocd_url, "_blank")}
-                    >
-                        Argo CD
-                    </Button>
+                    <div>
+                        <Button
+                            sx={naviButtonStyle}
+                            onMouseEnter={handleMenuOpen}
+                            onClick={handleMenuOpen}
+                        >
+                            Argo CD
+                        </Button>
+
+                        <Menu
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                            MenuListProps={{
+                                onMouseLeave: handleMenuClose,
+                                sx: {
+                                    backgroundColor: "white",
+                                    borderRadius: "12px",
+                                    boxShadow:
+                                        "0px 4px 12px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.1)",
+                                    paddingY: 0.5,
+                                    minWidth: 200,
+                                },
+                            }}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "center",
+                            }}
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "center",
+                            }}
+                        >
+                            <MenuItem
+                                sx={{
+                                    fontWeight: 600,
+                                    fontFamily: "'Poppins', 'Noto Sans KR', sans-serif",
+                                    fontSize: "15px",
+                                    borderRadius: "8px",
+                                    color: "#003366",
+                                    mb: 0.5,
+                                    "&:hover": {
+                                        backgroundColor: "#e6f0ff",
+                                        color: "#001f4d",
+                                    },
+                                }}
+                                onClick={() => {
+                                    window.open(datacenterUrl, "_blank", "noopener,noreferrer");
+                                    handleMenuClose();
+                                }}
+                            >
+                                Datacenter ArgoCD
+                            </MenuItem>
+                            <MenuItem
+                                sx={{
+                                    fontWeight: 600,
+                                    fontFamily: "'Poppins', 'Noto Sans KR', sans-serif",
+                                    fontSize: "15px",
+                                    borderRadius: "8px",
+                                    color: "#003366",
+                                    mb: 0.5,
+                                    "&:hover": {
+                                        backgroundColor: "#e6f0ff",
+                                        color: "#001f4d",
+                                    },
+                                }}
+                                onClick={() => {
+                                    window.open(kafkaUrl, "_blank", "noopener,noreferrer");
+                                    handleMenuClose();
+                                }}
+                            >
+                                Kafka ArgoCD
+                            </MenuItem>
+                            <MenuItem
+                                sx={{
+                                    fontWeight: 600,
+                                    fontFamily: "'Poppins', 'Noto Sans KR', sans-serif",
+                                    fontSize: "15px",
+                                    borderRadius: "8px",
+                                    color: "#003366",
+                                    "&:hover": {
+                                        backgroundColor: "#e6f0ff",
+                                        color: "#001f4d",
+                                    },
+                                }}
+                                onClick={() => {
+                                    window.open(lmvUrl, "_blank", "noopener,noreferrer");
+                                    handleMenuClose();
+                                }}
+                            >
+                                LMV ArgoCD
+                            </MenuItem>
+                        </Menu>
+                    </div>
+
                     <Button sx={naviButtonStyle} onClick={() => navigate("/kibana")}>
                         Kibana Dashboard
                     </Button>
