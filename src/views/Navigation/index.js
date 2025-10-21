@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Navigation() {
     const navigate = useNavigate();
+    const argocd_url = `${process.env.REACT_APP_ARGOCD_URL}/`
 
     const naviButtonStyle = {
         bgcolor: "white",
@@ -66,14 +67,20 @@ export default function Navigation() {
                         pr: 4,
                     }}
                 >
+                    <Button
+                        sx={naviButtonStyle}
+                        onClick={() => window.open(argocd_url, "_blank")}
+                    >
+                        Argo CD
+                    </Button>
                     <Button sx={naviButtonStyle} onClick={() => navigate("/kibana")}>
-                        Show Log Info
+                        Kibana Dashboard
                     </Button>
                     <Button sx={naviButtonStyle} onClick={() => navigate("/grafana")}>
-                        Show Metric Info
+                        Grafana Dashboard
                     </Button>
                     <Button sx={naviButtonStyle} onClick={() => navigate("/ai")}>
-                        Alert&AI
+                        Alert & AI
                     </Button>
                 </Box>
             </Toolbar>
