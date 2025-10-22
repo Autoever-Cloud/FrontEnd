@@ -83,7 +83,7 @@ export default function AiChat() {
                 <ReactMarkdown>{aiResponse}</ReactMarkdown>
               </div>
             ) : (
-              <p>왼쪽 알림 중 하나를 선택하면 AI 분석 결과가 여기에 표시됩니다.</p>
+              <p>우측 알림 중 하나를 선택하면 AI 분석 결과가 여기에 표시됩니다.</p>
             )}
           </div>
         </div>

@@ -18,40 +18,18 @@ export default function GrafanaPage() {
     if (!embedUrl) return <p>Loading dashboard...</p>;
 
     return (
-        <div
-            style={{
-                width: "100%",
-                height: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                paddingTop: "40px",
-            }}
-        >
-            <h2
-                style={{
-                    marginBottom: "30px",
-                    color: "white",
-                    fontWeight: "bold",
-                    fontSize: "2rem",
-                    letterSpacing: "1px",
-                }}
-            >
-                📊 Grafana 대시보드
-            </h2>
-            <iframe
-                src={embedUrl}
-                width="95%"
-                height="90%"
-                frameBorder="0"
-                title="Grafana Dashboard"
-                style={{
-                    border: "1px solid #ccc",
-                    borderRadius: "8px",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                }}
-            ></iframe>
+        <div style={{ padding: '20px' }}>
+        <h1 style={{ marginBottom: '30px', color: 'white' }}>📊 통합 매트릭 모니터링 대시보드</h1>
+            <div style={{ border: '1px solid #eee', borderRadius: '8px', padding: '16px', marginBottom: '24px', background: '#fff' }}>
+                <h3 style={{ marginTop: 0 }}>[Metric] 통합 대시보드</h3>
+                <iframe
+                    src={embedUrl}
+                    width="100%"
+                    height="600px"
+                    style={{ border: 'none' }}
+                    loading="lazy"
+                ></iframe>
+            </div> 
         </div>
     );
 }
