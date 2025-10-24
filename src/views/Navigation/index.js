@@ -170,7 +170,7 @@ export default function Navigation() {
                                     handleMenuClose();
                                 }}
                             >
-                                LMV ArgoCD
+                                Monitoring ArgoCD
                             </MenuItem>
                         </Menu>
                     </div>

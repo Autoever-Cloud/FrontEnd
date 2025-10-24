@@ -76,7 +76,7 @@ export default function AiChat() {
             {isLoading ? (
               <div className="loading-text">
                 <span className="spinner"></span>
-                <p>데이터 불러오는 중...</p>
+                <p>AI의 조언 가져오는 중...</p>
               </div>
             ) : aiResponse ? (
               <div className="ai-markdown">
