@@ -19,7 +19,7 @@ export default function GrafanaPage() {
 
     return (
         <div style={{ padding: '20px' }}>
-        <h1 style={{ marginBottom: '30px', color: 'white' }}>📊 통합 매트릭 모니터링 대시보드</h1>
+        <h1 style={{ marginBottom: '30px', color: 'white' }}>통합 매트릭 모니터링 대시보드</h1>
             <div style={{ border: '1px solid #eee', borderRadius: '8px', padding: '16px', marginBottom: '24px', background: '#fff' }}>
                 <h3 style={{ marginTop: 0 }}>[Metric] 통합 대시보드</h3>
                 <iframe

@@ -11,7 +11,7 @@ export default function KibanaPage(){
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1 style={{ marginBottom: '30px', color: 'white' }}>🚀 통합 로그 모니터링 대시보드</h1>
+      <h1 style={{ marginBottom: '30px', color: 'white' }}>통합 로그 모니터링 대시보드</h1>
       
       <KibanaDashboard
         src={securityDashboardUrl}
