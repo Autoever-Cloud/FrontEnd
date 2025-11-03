@@ -71,7 +71,7 @@ export default function Navigation() {
                     </IconButton>
                 </Box>
 
-                {/* 오른쪽 네비게이션 */}
+                {/* 오른쪽 네비게이션  */}
                 <Box
                     sx={{
                         display: "flex",
