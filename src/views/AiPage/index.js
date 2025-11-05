@@ -61,7 +61,7 @@ export default function AiChat() {
         {/* 왼쪽 영역: AI 분석 결과 */}
         <div className="main-content">
           <div className="content-section">
-            <h2>AI 로그 분석 결과</h2>
+            <h2>AI 로그·메트릭 분석 결과</h2>
 
             {selectedNotification && (
                 <>
