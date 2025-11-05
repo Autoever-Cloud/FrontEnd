@@ -30,7 +30,7 @@ function MainPage() {
                     <div className="BackBox" />
                     <div className="FrontBox">
                         <p>
-                            SOLOg는 Log 데이터를 활용해 <br />문제 해결(SOLVE)을 보조하는 <br />
+                            SOLOG는 Log 데이터를 활용해 <br />문제 해결(SOLVE)을 보조하는 <br />
                             통합 시각화, 알림 서비스입니다.
                         </p>
                         <p>

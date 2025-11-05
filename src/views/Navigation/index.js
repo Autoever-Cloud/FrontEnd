@@ -80,6 +80,16 @@ export default function Navigation() {
                         pr: 4,
                     }}
                 >
+                
+                    <Button sx={naviButtonStyle} onClick={() => navigate("/kibana")}>
+                        Kibana Dashboard
+                    </Button>
+                    <Button sx={naviButtonStyle} onClick={() => navigate("/grafana")}>
+                        Grafana Dashboard
+                    </Button>
+                    <Button sx={naviButtonStyle} onClick={() => navigate("/ai")}>
+                        Alert & AI
+                    </Button>
                     <div>
                         <Button
                             sx={naviButtonStyle}
@@ -175,15 +185,6 @@ export default function Navigation() {
                         </Menu>
                     </div>
 
-                    <Button sx={naviButtonStyle} onClick={() => navigate("/kibana")}>
-                        Kibana Dashboard
-                    </Button>
-                    <Button sx={naviButtonStyle} onClick={() => navigate("/grafana")}>
-                        Grafana Dashboard
-                    </Button>
-                    <Button sx={naviButtonStyle} onClick={() => navigate("/ai")}>
-                        Alert & AI
-                    </Button>
                 </Box>
             </Toolbar>
         </AppBar>
