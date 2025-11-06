@@ -26,10 +26,10 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app:latest
         build-args: |
           REACT_APP_PROD_BASE_URL=${{ secrets.REACT_APP_PROD_BASE_URL }}
-          REACT_APP_KIBANA_URL=${{ secrets.REACT_APP_KIBANA_URL }}
-          REACT_APP_ARGOCD_DATACENTER_URL=${{ secrets.REACT_APP_ARGOCD_DATACENTER_URL }}
-          REACT_APP_ARGOCD_KAFKA_URL=${{ secrets.REACT_APP_ARGOCD_KAFKA_URL }}
-          REACT_APP_ARGOCD_LMV_URL=${{ secrets.REACT_APP_ARGOCD_LMV_URL }}
+          REACT_APP_KIBANA_URL_AUTH=${{ secrets.REACT_APP_KIBANA_URL_AUTH }}
+          REACT_APP_KIBANA_URL_KMSG=${{ secrets.REACT_APP_KIBANA_URL_KMSG }}
+          REACT_APP_KIBANA_URL_SERVICE=${{ secrets.REACT_APP_KIBANA_URL_SERVICE }}
+          
 
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master 

@@ -4,10 +4,14 @@ import KibanaDashboard from "./kibanaDashboard";
 
 export default function KibanaPage(){
     // 각 대시보드의 Iframe URL을 변수로 저장합니다.
-  const kibana_url = process.env.REACT_APP_KIBANA_URL;
-  const securityDashboardUrl = `${kibana_url}/app/dashboards#/view/45856c35-f452-439b-82ea-0404357a2db1?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-time-filter=true`;
-  const infraDashboardUrl = `${kibana_url}/app/dashboards#/view/da7f37b2-3f6d-41ac-94ba-543b444c0c21?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-time-filter=true`;
-  const apiDashboardUrl = `${kibana_url}/app/dashboards#/view/69b1ad35-0a36-4855-b982-d2d8f2b21738?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))&show-time-filter=true`;
+  const kibana_url_kmsg = process.env.REACT_APP_KIBANA_URL_KMSG;
+  const kibana_url_service = process.env.REACT_APP_KIBANA_URL_SERVICE;
+  const kibana_url_auth = process.env.REACT_APP_KIBANA_URL_AUTH;
+
+
+    const securityDashboardUrl = `${kibana_url_auth}`;
+  const infraDashboardUrl = `${kibana_url_kmsg}`;
+  const apiDashboardUrl = `${kibana_url_service}`;
 
   return (
     <div style={{ padding: '20px' }}>
