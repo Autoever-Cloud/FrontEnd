@@ -8,8 +8,7 @@ export default function KibanaPage(){
   const kibana_url_service = process.env.REACT_APP_KIBANA_URL_SERVICE;
   const kibana_url_auth = process.env.REACT_APP_KIBANA_URL_AUTH;
 
-
-    const securityDashboardUrl = `${kibana_url_auth}`;
+  const securityDashboardUrl = `${kibana_url_auth}`;
   const infraDashboardUrl = `${kibana_url_kmsg}`;
   const apiDashboardUrl = `${kibana_url_service}`;
 
