@@ -19,7 +19,7 @@ export default function KibanaPage(){
       <KibanaDashboard
         src={securityDashboardUrl}
         title="[Security] 보안 감사 대시보드"
-      />S
+      />
       
       <KibanaDashboard
         src={infraDashboardUrl}
